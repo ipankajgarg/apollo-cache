@@ -5,6 +5,7 @@ import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import actions from "./actions";
 import Home from "./Home";
+import CacheData from "./CacheData";
 
 import {
   BrowserRouter as Router,
@@ -25,6 +26,7 @@ class App extends Component {
       <Router>
         <Route path="/" exact component={Home} />
         <Route path="/about" component={About} />
+        <Route path="/cache" component={CacheData} />
       </Router>
     );
   }

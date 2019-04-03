@@ -1,27 +1,27 @@
 import React, { Component } from "react";
 import gql from "graphql-tag";
-import { Query } from "react-apollo";
+//import { Query } from "react-apollo";
 import { Link } from "react-router-dom";
 import { graphql, withApollo } from "react-apollo";
 
 class Home extends Component {
+  //this.props.data.loading
+
   render() {
     console.log(this.props);
-    if (!this.props.data.loading) {
+    if (!this.props.loading) {
       return (
         <div className="App">
-          {this.props.data.getPost.map(item => (
+          {this.props.getPost.map(item => (
             <p key={item.id}>{item.title}</p>
           ))}
           <Link to="/about">redirect</Link>
+          <br />
+          <Link to="/cache">cache</Link>
         </div>
       );
     } else {
-      return (
-        <div className="App">
-          <Link to="/about">redirect</Link>
-        </div>
-      );
+      return <div />;
     }
   }
 }
@@ -38,5 +38,6 @@ const query = gql`
 `;
 
 export default graphql(query, {
-  options: props => ({ variables: { userId: "pankaj" } })
+  options: props => ({ variables: { userId: "pankaj" } }),
+  props: ({ data: { loading, getPost } }) => ({ loading, getPost })
 })(withApollo(Home));
